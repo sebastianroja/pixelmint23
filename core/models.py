@@ -29,7 +29,8 @@ class Usuario(models.Model):
     Contraseña = models.CharField(max_length=50, verbose_name='Contraseña')
     confirmContraseña = models.CharField(max_length=50, verbose_name='confirmContraseña')
     def __str__(self):
-        return self.idUsuario
+        return str(self.idUsuario)
+    
     
 class carrito(models.Model):
     idCarrito=models.IntegerField(primary_key=True, verbose_name='id de carro')
