@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .form import *
 from .models import Producto
+from .models import Usuario
 
 
 
@@ -25,9 +26,10 @@ def iniciarsesion(request):
 def productos(request):
     product=Producto.objects.all()
     context= {"Products":product}
-    return render(request, 'core/productos copy.html',context)
+    print (context)
+    return render(request, 'core/productos_copy.html',context)
 def productos_copy(request):
-    return render(request, 'core/productos copy.html')
+    return render(request, 'core/productos_copy.html')
 
 def Crearcuenta(request):
     datos = {
@@ -43,12 +45,15 @@ def Crearcuenta(request):
 
 
 def EditarPerfil(request, id):
-    Usuario = Usuario.objects.get(idUsuario=id)
+    
+    print (id) 
+    user = Usuario.objects.get(idUsuario=id)
+    print(user)
     datos = {
-        'form': ClientForm(instance=Usuario)
+        'form': ClientForm(instance=user)
     }
     if request.method=='POST':
-        formulario= ClientForm(data=request.POST, instance=Usuario)
+        formulario= ClientForm(data=request.POST, instance=user)
         if formulario.is_valid:
             formulario.save()
             datos['mensaje'] = "Modificado Correctamente"
