@@ -30,34 +30,23 @@
        
        <a href="{% url 'Crearcuenta'%}" class="nav-link"><i class="fa-solid fa-user"></i> Crear cuenta  </a>
        <a href="{% url 'iniciarsesion' %}" class="nav-link"><i class="fa-solid fa-address-card"></i>Iniciar sesión </a>
-       <a href="{% url 'EditarPerfil'%}" class="nav-link"><i class="fa-solid fa-user"></i> Editar perfil </a>
+       <a href="{% url 'EditarPerfil_copy'%}" class="nav-link"><i class="fa-solid fa-user"></i> Editar perfil </a>
        <a href="{% url 'Contacto' %}" class="nav-link"><i class="fa-solid fa-phone"></i> Contacto </a>
        <a href="{% url 'carritoCompras' %}" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> Carrito de compras  </a>
    
        </header>
        <div class="fondo">
-    <div class="row">
-        <h1>Editar Perfil</h1>
-    </div>
-    <div class="container">
-        <div class="row">
-            <form action="" method="post" id="formulario">
-                {% csrf_token %}
-                <table class="form-group">
-                    {{form.as_table}}
-                </table>
-
-                <input type="submit" class="btn btn-danger" id="enviar" value="Modificar">
-                <input type="reset" class="btn btn-primary" id="limpiar" value="Limpiar">
-                <div id="error" class="alert alert-danger" role="alert"></div>
-
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Cambiar datos del usuario</h1>
+            <form method="post"> {% csrf_token %} <div class="form-group"> <label for="first_name">Nombre:</label> <input
+                        type="text" name="first_name" class="form-control" value="{{ user.first_name }}" required> </div>
+                <div class="form-group"> <label for="last_name">Apellido:</label> <input type="text" name="last_name"
+                        class="form-control" value="{{ user.last_name }}" required> </div>
+                <div class="form-group"> <label for="email">Email:</label> <input type="email" name="email" class="form-control"
+                        value="{{ user.email }}" required> </div> <button type="submit" class="btn btn-primary">Guardar
+                    cambios</button>
             </form>
-            <div class="alert alert-success" role="alert">
-                {{mensaje}}
-            </div></div>
         </div>
-
-    </div>
 
 
 
