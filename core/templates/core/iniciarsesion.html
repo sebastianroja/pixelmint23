@@ -18,19 +18,17 @@
 
 <body>
   <header>
-    <a href="#" class="logo">
+    <a href="{% url 'index'%}" class="logo">
       <img src="../static/img/logo.png" alt="logo tienda">
       <h2 class="nombre-tienda"><img src="../static/img/fondopixel2.png" alt=""></h2 style="background: transparent;">
     </a>
     <nav>
-      <a href="{% url 'index'%}" class="nav-link"><i class="fa-solid fa-house"></i> Inicio </a>
-      <a href="{% url 'productos'%}" class="nav-link"><i class="fa-solid fa-bag-shopping"></i> Productos </a>
+      
 
       <a href="{% url 'Crearcuenta'%}" class="nav-link"><i class="fa-solid fa-user"></i> Crear cuenta </a>
       <a href="{% url 'iniciarsesion' %}" class="nav-link"><i class="fa-solid fa-address-card"></i>Iniciar sesión </a>
-      <a href="{% url 'EditarPerfil_copy'%}" class="nav-link"><i class="fa-solid fa-user"></i> Editar perfil </a>
-      <a href="{% url 'Contacto' %}" class="nav-link"><i class="fa-solid fa-phone"></i> Contacto </a>
-      <a href="{% url 'carritoCompras' %}" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> Carrito de compras
+      
+      
       </a>
 
   </header>

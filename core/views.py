@@ -16,15 +16,17 @@ class usuario:
 
 
 def iniciarsesion(request):
-    print("holaquetal")
+    
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            print("usernotnone")
-            login(request, user)
-            return redirect('index')
+            if user.is_superuser:
+                return redirect('admin')
+            else:
+                login(request, user)
+                return redirect('index')
         else:
             print('usernone')
             error_message = 'nombre de usuario o contraseña incorrecto'
@@ -34,6 +36,9 @@ def iniciarsesion(request):
 
 def index():
     return render('core/index.html')
+
+def admin():
+    return render('admin')
 
 
 def index(request):
@@ -66,36 +71,28 @@ def Crearcuenta(request):
         'form': ClientForm()
     }
     if request.method == 'POST':
+        print(request.POST)
         
         formulario = ClientForm(request.POST)
         print(formulario)
         if formulario.is_valid:
             User = get_user_model()
-            #user = User.objects.create_user(email=formulario['Correo'].value(), password="foo",username="hola")
+            #user = User.objects.create_user(email=formulario['Correo'].value(),password=formulario['Contraseña'].value(),username=formulario['Nombre_usuario'].value(),first_name=formulario['Nombre_usuario'].value(),last_name=formulario['Apellido'].value())
             formulario.save()
             datos['mensaje'] = "Guardado Correctamente"
 
     return render(request, 'core/Crearcuenta.html', datos)
-
-
-def EditarPerfil(request):
-    import random
-    # traer usuario actual#
-    idUsuario = random.randint(1, 4)
-    print(idUsuario)
-    user = Usuario.objects.get(idUsuario=idUsuario)
-    print(user)
-    datos = {
-        'form': ClientForm(instance=user)
-    }
+def register(request):
     if request.method == 'POST':
-        formulario = ClientForm(data=request.POST, instance=user)
-        if formulario.is_valid:
-            formulario.save()
-            datos['mensaje'] = "Modificado Correctamente"
-
-    return render(request, 'core/EditarPerfil.html', datos)
-
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        password = request.POST['password']
+        username = request.POST['username']
+        User = get_user_model()
+        user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, password=password, username=username ) 
+        return redirect('iniciarsesion') 
+    return render(request, 'core/Crearcuenta.html')
 
 def profile(request):
     print("hola profile")

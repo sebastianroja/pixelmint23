@@ -11,10 +11,12 @@ urlpatterns = [
     path('Contacto', Contacto, name="Contacto"),
     path('', iniciarsesion, name="iniciarsesion"),
     path('productos/', productos, name="productos"),
-    path('Crearcuenta/', Crearcuenta, name="Crearcuenta"),
-    #path('EditarPerfil/', EditarPerfil, name="EditarPerfil"),
+    path('Crearcuenta/', register, name="Crearcuenta"),
+    
       path('EditarPerfil_copy/', profile, name="EditarPerfil_copy"),
-    path('carritoCompras/', carritoCompras, name="carritoCompras")
+      path('admin/', admin, name="admin"),
+
+    
 
 
 ]
